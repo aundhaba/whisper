@@ -19,7 +19,7 @@
     <!-- Hero Section -->
     <section class="hero">
       <div class="hero-content">
-        <h1 class="hero-title">为长文写作而生的创作编辑器</h1>
+        <h1 class="hero-title">指尖跳动·为长文写作而生的创作编辑器</h1>
         <p class="hero-subtitle">
           一份代码，适配全平台。永远不会丢失的数据。精美的界面和友好的交互设计。
         </p>
