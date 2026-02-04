@@ -12,22 +12,27 @@ permissions:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    # 设置全局默认运行目录为双层 whisper 文件夹
+    defaults:
+      run:
+        working-directory: ./whisper/whiper
+
     steps:
       - name: 检出代码
         uses: actions/checkout@v4
 
-      # --- 关键步骤：安装 PNPM ---
       - name: 安装 pnpm
         uses: pnpm/action-setup@v3
         with:
-          version: 8 # 或者指定你本地使用的版本
-      # ------------------------
+          version: 8
 
       - name: 设置 Node.js
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: 'pnpm' # 缓存改为 pnpm 以加快后续构建速度
+          cache: 'pnpm'
+          # 指向最深层的 lock 文件位置
+          cache-dependency-path: './whisper/whiper/pnpm-lock.yaml'
 
       - name: 安装依赖
         run: pnpm install
@@ -38,7 +43,8 @@ jobs:
       - name: 上传构建产物
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist'
+          # 必须指向构建出来的那个 dist 文件夹
+          path: './whisper/whiper/dist'
 
       - name: 部署到 GitHub Pages
         id: deployment
