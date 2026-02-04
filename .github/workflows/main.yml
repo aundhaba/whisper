@@ -15,7 +15,7 @@ jobs:
     # 设置全局默认运行目录为双层 whisper 文件夹
     defaults:
       run:
-        working-directory: ./whisper/whiper
+        working-directory: ./whisper
 
     steps:
       - name: 检出代码
@@ -32,7 +32,7 @@ jobs:
           node-version: 20
           cache: 'pnpm'
           # 指向最深层的 lock 文件位置
-          cache-dependency-path: './whisper/whiper/pnpm-lock.yaml'
+          cache-dependency-path: './whisper/pnpm-lock.yaml'
 
       - name: 安装依赖
         run: pnpm install
@@ -44,7 +44,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # 必须指向构建出来的那个 dist 文件夹
-          path: './whisper/whiper/dist'
+          path: './whisper/dist'
 
       - name: 部署到 GitHub Pages
         id: deployment
